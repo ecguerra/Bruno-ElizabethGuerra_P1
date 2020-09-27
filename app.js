@@ -8,9 +8,10 @@ let papers
 let rug 
 let glass
 let mouse
+let furniture
 
-
-function Object(x,y,width,height, color) {
+function Object(name,x,y,width,height, color) {
+    this.name = name
     this.x = x
     this.y = y
     this.width = width
@@ -23,6 +24,28 @@ function Object(x,y,width,height, color) {
     }
 }
 
+furniture = [          
+    lamp = new Object('lamp',650,75,20,400,'#FFFACD'),
+    pillow = new Object('pillow',500,250,50,50,'#F0F8FF'),
+    papers = new Object('papers',10,300,40,100,'white'),
+    rug = new Object('rug',50,500,700,5,'#4682B4'),
+    glass = new Object('glass of water',100,250,20,40,'ghostwhite'),
+    mouse = new Object('toy mouse',500,480,30,10,'hotpink'), 
+]
+
+const detectHit = thing => {
+    // check for collision on x-axis
+    // if hero's bottom value is > ogre's top value
+    if (cora.x + cora.width > thing.x &&
+        cora.x < cora.x + thing.width &&
+        cora.y + cora.height > thing.y &&
+        cora.y < cora.y + thing.height
+    ) {
+        thing.notBroken = false
+    }
+
+}
+
 const gameLoop = () => {
     // console.log('looping 🐱‍🐉')
     // clear the canvas
@@ -30,15 +53,14 @@ const gameLoop = () => {
     // display the x, y coordinates of our hero onto the DOM
         movementDisplay.innerText = `x:${cora.x}\ny:${cora.y}`
     // check if the ogre is alive
- //       if (ogre.alive) {
+        furniture.forEach(thing => {
+            if (thing.notBroken) {
             // render the ogre
-            lamp.render()
-            pillow.render()
-            papers.render()
-            rug.render()
-            // check for collision
- //           detectHit()
- //       }
+            thing.render()
+        // check for collision
+                furniture.forEach(detectHit)
+            }
+        })
         // render the hero
         cora.render()
     }
@@ -71,18 +93,14 @@ document.addEventListener('DOMContentLoaded',()=>{
        game = document.querySelector('#game')
    
        //CANVAS CONFIG
-       game.setAttribute('height', 400) // can also be done responsively
+       game.setAttribute('height', 600) // can also be done responsively
        game.setAttribute('width', 800)
        // context
        ctx = game.getContext('2d')
-   
-       // OBJECT REFS    
-       lamp = new Object(300,100,30,120,'#FFFACD')
-       pillow = new Object(140,150,20,20,'#F0F8FF')
-       papers = new Object(10,50,20,100,'white')
-       rug = new Object(10,300,700,20,'#4682B4')
+    
+       console.log(furniture)
        
-       cora = new Object(30,150,10,10, 'black')
+       cora = new Object('Cora',30,150,20,20, 'black')
        
        document.addEventListener('keydown',movementHandler)
        
