@@ -1,6 +1,7 @@
 // Class for furniture items
 let movementDisplay
 let game
+let status
 let ctx
 let lamp
 let pillow
@@ -28,7 +29,7 @@ furniture = [
     lamp = new Object('lamp',650,75,20,400,'#FFFACD'),
     pillow = new Object('pillow',500,250,50,50,'#F0F8FF'),
     papers = new Object('papers',10,300,40,100,'white'),
-    rug = new Object('rug',50,500,700,5,'#4682B4'),
+    rug = new Object('rug',50,500,700,10,'#4682B4'),
     glass = new Object('glass of water',100,250,20,40,'ghostwhite'),
     mouse = new Object('toy mouse',500,480,30,10,'hotpink'), 
 ]
@@ -41,10 +42,17 @@ const detectHit = thing => {
         cora.y + cora.height > thing.y &&
         cora.y < cora.y + thing.height
     ) {
-        thing.notBroken = false
+    //-------BUGGY
+        document.addEventListener('keydown',e =>{
+            // y = 89 n = 78 // 'KeyY' 'KeyN'
+            status.innerText = `Want to break the ${thing.name}?`
+            if (e.code==='KeyY') thing.notBroken = false
+        })
     }
-
 }
+
+// const choice = e => {
+// }
 
 const gameLoop = () => {
     // console.log('looping 🐱‍🐉')
@@ -58,7 +66,7 @@ const gameLoop = () => {
             // render the ogre
             thing.render()
         // check for collision
-                furniture.forEach(detectHit)
+            furniture.forEach(detectHit)
             }
         })
         // render the hero
@@ -68,21 +76,20 @@ const gameLoop = () => {
 const movementHandler = e => {
     // console.log(e)
     // w: 87, a: 65, s: 83, d: 68
-    switch(e.keyCode) {
-        case (87): // w up
+    // 'KeyW' 'KeyA' 'KeyS' 'KeyD'
+    switch(e.code) {
+        case ('KeyW'): // w up
             if(cora.y > 0) cora.y -= 5
             break
-        case (83): // s down
+        case ('KeyS'): // s down
             if (cora.y + cora.height < game.height) cora.y += 5
             break
-        case (65): // a left
+        case ('KeyA'): // a left
             if (cora.x > 0) cora.x -= 5
             break
-        case(68): // d right
+        case('KeyD'): // d right
             if (cora.x + cora.width < game.width) cora.x += 5
             break
-        default:
-            console.log('invalid keystroke')
     }
 }
 
@@ -91,10 +98,11 @@ document.addEventListener('DOMContentLoaded',()=>{
        movementDisplay = document.querySelector('#movement')
        // canvas
        game = document.querySelector('#game')
-   
        //CANVAS CONFIG
        game.setAttribute('height', 600) // can also be done responsively
        game.setAttribute('width', 800)
+       //status display
+       status = document.querySelector('#status')
        // context
        ctx = game.getContext('2d')
     
