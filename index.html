@@ -10,13 +10,14 @@
 <body>
     <body>
         <div id="container">
-            <aside id="top-left"><h2>Cora Destroys Everything!</h2></aside>
-            <aside id="top-right"><h2 id="movement"></h2></aside>
-            <main>
+            <aside id="top-left" class="display-none"><h2>Cora Destroys Everything!</h2></aside>
+            <aside id="top-right" class="display-none"><h2 id="movement"></h2></aside>
+            <main id="main">
                 <canvas id="game"></canvas>
+                <div id="overlay"><h1>Cora Destroys Everything!</h1><p id="msg">Use WASD keys to move</p></div>
             </main>
-            <aside id="btm-left"><h2>0</h2></aside>
-            <aside id="btm-right"><h2 id="status">play</h2></aside>
+            <aside id="btm-left" class="display-none"><h2>0</h2></aside>
+            <aside id="btm-right" class="display-none"><h2 id="status">play</h2></aside>
           </div>
     <script src="./app.js"></script>
 </body>
