@@ -47,10 +47,11 @@ Move Cora with WASD and walk up to things in the room to interact with them. You
 - Original graphics
     - start with boxes to get game mechanics correct
     - look at sprite packages from game bundle to use in interim
-- Point & Click instead of WASD?
+- paw/pawprint cursor
 
 ## Other
 - keyCode is apparently deprecated and you should now use code [MDN Reference](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyCode)
 - setInterval also apparently isn't the best choice, and requestAnimationFrame is better practice [HTML5 Canvas Deep Dive](https://joshondesign.com/p/books/canvasdeepdive/chapter04.html#settimeout)
 - c.fillText(overlay.subtitle, 190,250)
 - isPointInPath
+- Point & Click instead of WASD?

@@ -2,7 +2,6 @@
 let movementDisplay
 let game
 let overlay
-let msg
 let ctx
 let lamp
 let pillow
@@ -26,13 +25,34 @@ function Object(name,x,y,width,height, color) {
     }
 }
 
+const changeMsg = msg => {
+    while (overlay.firstChild) overlay.removeChild(overlay.firstChild)
+    overlay.classList.remove('display-none')
+    overlay.style.height = '100px'
+    overlay.style.top = '220px'
+    let p = document.createElement('p')
+    p.innerText = msg
+    overlay.appendChild(p)
+    let buttonContainer = document.createElement('div')
+    buttonContainer.classList.add('button-container')
+    overlay.appendChild(buttonContainer)
+    let yesButton = document.createElement('button')
+    yesButton.setAttribute('type','button')
+    yesButton.innerText='yes'
+    buttonContainer.appendChild(yesButton)
+    let noButton = document.createElement('button')
+    noButton.setAttribute('type','button')
+    noButton.innerText = 'no'
+    buttonContainer.appendChild(noButton)
+}
+
 furniture = [          
-    lamp = new Object('lamp',650,75,30,400,'#FFFACD'),
+    lamp = new Object('lamp',650,75,40,400,'#FFFACD'),
     pillow = new Object('pillow',500,250,50,50,'#F0F8FF'),
     papers = new Object('papers',10,300,40,100,'white'),
     rug = new Object('rug',50,500,700,100,'#4682B4'),
     coffee = new Object('cup of coffee',100,250,20,40,'peru'),
-    mouse = new Object('toy mouse',500,480,50,30,'hotpink'), 
+    mouse = new Object('toy mouse',500,480,60,40,'hotpink'), 
 ]
 
 // const detectHit = thing => {
@@ -67,6 +87,7 @@ const checkCollision = e => {
             thing.y + thing.height >= e.offsetY
         ){
             console.log(thing)
+            changeMsg(`You broke ${thing.name}!`)
             thing.notBroken = false
         }
     })
@@ -148,7 +169,6 @@ document.addEventListener('DOMContentLoaded',()=>{
        game.setAttribute('width', 800)
        //status display
        overlay = document.querySelector('#overlay')
-       msg = document.querySelector('#msg')
 
        // context
        ctx = game.getContext('2d')

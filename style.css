@@ -58,7 +58,7 @@ html,body {
     align-items: center;
   }
   
-  h1, #msg {
+  h1, p {
     width: 100%;
     font-family: 'Josefin Sans', sans-serif;
     color: indigo;
@@ -73,10 +73,37 @@ html,body {
   }
 
   p {
+    font-size: 30px;
+  }
+
+  #msg {
     font-size: 20px;
     padding: 0 0 50px 0;
   }
   
+  .button-container {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  button {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 15px;
+    color: white;
+    background-color: mediumslateblue;
+    border: none;
+    border-radius: 5px;
+    margin: 5px;
+    padding: 5px;
+    cursor: pointer;
+  }
+
+button:hover {
+  color: mediumslateblue;
+  background-color: lavender;
+}
+
+
   canvas {
     /* background-image: url('../img/stone.png'); */
     /* background-repeat: repeat; */
@@ -88,6 +115,8 @@ html,body {
     left: 0;
   }
   
+
+
   #container {
   max-width: 50em;
   /* height: 70vh; */
