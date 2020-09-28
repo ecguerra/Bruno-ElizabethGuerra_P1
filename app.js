@@ -38,10 +38,16 @@ const changeMsg = msg => {
     overlay.appendChild(buttonContainer)
     let yesButton = document.createElement('button')
     yesButton.setAttribute('type','button')
+    yesButton.setAttribute('id','yes-button')
     yesButton.innerText='yes'
     buttonContainer.appendChild(yesButton)
+    // This is close, but look at it later
+    yesButton.addEventListener('click', e => {
+        console.log(e.target)
+    })
     let noButton = document.createElement('button')
     noButton.setAttribute('type','button')
+    noButton.setAttribute('id','no-button')
     noButton.innerText = 'no'
     buttonContainer.appendChild(noButton)
 }
@@ -79,16 +85,19 @@ furniture = [
 // const choice = e => {
 // }
 
+// ----- Can re-click an object even after it's broken
 const checkCollision = e => {
     furniture.forEach(thing => {
-        if ( thing.x <= e.offsetX &&
-            thing.x + thing.width >= e.offsetX &&
-            thing.y <= e.offsetY &&
-            thing.y + thing.height >= e.offsetY
-        ){
-            console.log(thing)
-            changeMsg(`You broke ${thing.name}!`)
-            thing.notBroken = false
+        if(thing.notBroken) {
+            if ( thing.x <= e.offsetX &&
+                thing.x + thing.width >= e.offsetX &&
+                thing.y <= e.offsetY &&
+                thing.y + thing.height >= e.offsetY
+            ){
+                console.log(thing)
+                changeMsg(`Do you want to break the ${thing.name}?`)
+                thing.notBroken = false
+            }
         }
     })
 }
@@ -113,7 +122,7 @@ const gameLoop = () => {
     furniture.forEach(thing => {
         if (thing.notBroken) {
             // render the ogre
-            thing.render()
+            thing.render() // when styling, create "broken" sprite for objects
             // check for collision
     //        furniture.forEach(detectHit)
         }

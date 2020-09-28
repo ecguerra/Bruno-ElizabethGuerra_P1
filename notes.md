@@ -42,7 +42,20 @@ Move Cora with WASD and walk up to things in the room to interact with them. You
 ## Obstacles
     - Human comes in to get coffee after turn 2 and leaves the mouse
     - Gust of wind blows through window after turn 4 and can knock over papers and/or blow stuffing around
-    
+
+## To-Do
+- Write functions for yes/no object buttons
+- Write logic for linked events
+    - Turn counter (only goes up when something breaks)
+- Write meters/score
+- Add reset button
+- write win condition
+[x] update collision function
+    - shouldn't be able to still click on broken objects
+- style
+- clean up code
+
+
 ## Wish List
 - Original graphics
     - start with boxes to get game mechanics correct
@@ -54,4 +67,4 @@ Move Cora with WASD and walk up to things in the room to interact with them. You
 - setInterval also apparently isn't the best choice, and requestAnimationFrame is better practice [HTML5 Canvas Deep Dive](https://joshondesign.com/p/books/canvasdeepdive/chapter04.html#settimeout)
 - c.fillText(overlay.subtitle, 190,250)
 - isPointInPath
-- Point & Click instead of WASD?
+- Point & Click instead of WASD? - Yes
