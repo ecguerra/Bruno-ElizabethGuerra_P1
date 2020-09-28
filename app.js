@@ -1,5 +1,3 @@
-// Class for furniture items
-let movementDisplay
 let game
 let overlay
 let ctx
@@ -25,6 +23,17 @@ function Object(name,x,y,width,height, color) {
     }
 }
 
+// FURNITURE CONFIG
+furniture = [          
+    lamp = new Object('lamp',650,75,40,400,'#FFFACD'),
+    pillow = new Object('pillow',500,250,50,50,'#F0F8FF'),
+    papers = new Object('papers',10,300,40,100,'white'),
+    rug = new Object('rug',50,500,700,100,'#4682B4'),
+    coffee = new Object('cup of coffee',100,250,20,40,'peru'),
+    mouse = new Object('toy mouse',500,480,60,40,'hotpink'), 
+]
+
+// When called, creates a new message in the overlay
 const changeMsg = msg => {
     while (overlay.firstChild) overlay.removeChild(overlay.firstChild)
     overlay.classList.remove('display-none')
@@ -41,10 +50,6 @@ const changeMsg = msg => {
     yesButton.setAttribute('id','yes-button')
     yesButton.innerText='yes'
     buttonContainer.appendChild(yesButton)
-    // This is close, but look at it later
-    yesButton.addEventListener('click', e => {
-        console.log(e.target)
-    })
     let noButton = document.createElement('button')
     noButton.setAttribute('type','button')
     noButton.setAttribute('id','no-button')
@@ -52,14 +57,7 @@ const changeMsg = msg => {
     buttonContainer.appendChild(noButton)
 }
 
-furniture = [          
-    lamp = new Object('lamp',650,75,40,400,'#FFFACD'),
-    pillow = new Object('pillow',500,250,50,50,'#F0F8FF'),
-    papers = new Object('papers',10,300,40,100,'white'),
-    rug = new Object('rug',50,500,700,100,'#4682B4'),
-    coffee = new Object('cup of coffee',100,250,20,40,'peru'),
-    mouse = new Object('toy mouse',500,480,60,40,'hotpink'), 
-]
+
 
 // const detectHit = thing => {
 //     // check for collision on x-axis
@@ -85,7 +83,8 @@ furniture = [
 // const choice = e => {
 // }
 
-// ----- Can re-click an object even after it's broken
+
+// Maybe update with isPointInPath later
 const checkCollision = e => {
     furniture.forEach(thing => {
         if(thing.notBroken) {
@@ -96,39 +95,32 @@ const checkCollision = e => {
             ){
                 console.log(thing)
                 changeMsg(`Do you want to break the ${thing.name}?`)
-                thing.notBroken = false
+                document.querySelector('#yes-button').addEventListener('click', () => thing.notBroken = false)
             }
         }
     })
 }
 
-
-
+// Movement
 const pointAndClick = e => {
     overlay.classList.add('display-none')
     cora.x = e.offsetX
     cora.y = e.offsetY
 }
 
+//Runs the game, renders all the items
 const gameLoop = () => {
-    // console.log('looping 🐱‍🐉')
     window.requestAnimFrame(gameLoop)
     // clear the canvas
-        ctx.clearRect(0,0,game.width, game.height)
-    // display the x, y coordinates of our hero onto the DOM
-    //    movementDisplay.innerText = `x:${cora.x}\ny:${cora.y}`
-    // check if the ogre is alive
+    ctx.clearRect(0,0,game.width, game.height)
     document.addEventListener('click',checkCollision)
     furniture.forEach(thing => {
         if (thing.notBroken) {
-            // render the ogre
             thing.render() // when styling, create "broken" sprite for objects
             // check for collision
     //        furniture.forEach(detectHit)
         }
     })
-    // render the hero
-
     cora.render()
     }
 
@@ -169,26 +161,24 @@ window.requestAnimFrame = (function(){
   })() 
 
 document.addEventListener('DOMContentLoaded',()=>{
-       // the movement tag
-       movementDisplay = document.querySelector('#movement')
        // canvas
        game = document.querySelector('#game')
        //CANVAS CONFIG
        game.setAttribute('height', 600) // can also be done responsively
        game.setAttribute('width', 800)
-       //status display
+
+       // Overlay for messages
        overlay = document.querySelector('#overlay')
 
        // context
        ctx = game.getContext('2d')
-    
-    //   console.log(furniture)
-       
+
+       //CHARACTER CONFIG
        cora = new Object('Cora',390,450,20,20, 'black')
        
 //     document.addEventListener('keydown',movementHandler)
         document.addEventListener('click', pointAndClick)
        
-    //   let runGame = setInterval(gameLoop, 60) // approx 16-17 fps
+//   let runGame = setInterval(gameLoop, 60) // approx 16-17 fps
         window.requestAnimFrame(gameLoop)    
 })

@@ -4,7 +4,7 @@
 You are Cora, a tiny, excitable kitten who LOVES TO PLAY WITH EVERYTHING. Everything in Cora's world is a food, a friend, or a toy, and the best thing to do with your toys is DESTROY THEM. You find yourself in a room full of SO. MANY. TOYS. and you can't wait to destroy them all!
 
 ## Gameplay
-Move Cora with WASD and walk up to things in the room to interact with them. Your goal is to break everything in the room, but the challenge is to find the best way to do it. Objects are affected by each other and with the environment, plus you don't want your human to catch you before you get a chance to break it all! Try to find the best order to help Cora Destroy Everything!
+Move Cora with your mouse and walk up to things in the room to interact with them. Your goal is to break everything in the room, but the challenge is to find the best way to do it. Objects are affected by each other and with the environment, plus you don't want your human to catch you before you get a chance to break it all! Try to find the best order to help Cora Destroy Everything!
 
 ## Objects
 - Lamp
@@ -61,6 +61,9 @@ Move Cora with WASD and walk up to things in the room to interact with them. You
     - start with boxes to get game mechanics correct
     - look at sprite packages from game bundle to use in interim
 - paw/pawprint cursor
+- "Do you want to break ___?" prompts unique to each object
+- More object leveling up
+- More objects
 
 ## Other
 - keyCode is apparently deprecated and you should now use code [MDN Reference](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyCode)
