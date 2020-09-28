@@ -45,11 +45,11 @@ Your app must:
 - **Deployment**: Did you deploy your application to a public url using GitHub Pages?
 - **Total**: Your instructors will give you a total score on your project between:
 
-### Score / Expectations
-
-**0** - Incomplete.
-**1** - Does not meet expectations.
-**2** - Meets expectations, good job!
-**3** - Exceeds expectations, you wonderful creature, you!
+Score | Expectations
+-------|-------
+**0** | Incomplete.
+**1** | Does not meet expectations.
+**2** | Meets expectations, good job!
+**3** | Exceeds expectations, you wonderful creature, you!
 
 This will serve as a helpful overall gauge of whether you met the project goals, but **the more important scores are the individual ones** above, which can help you identify where to focus your efforts for the next project!

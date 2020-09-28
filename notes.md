@@ -40,20 +40,20 @@ Move Cora with WASD and walk up to things in the room to interact with them. You
 - Couch - not something to destroy, but you end up sleeping here at the end
 
 ## Obstacles
-    - Human comes in to get coffee after turn 2 and leaves the mouse
-    - Gust of wind blows through window after turn 4 and can knock over papers and/or blow stuffing around
+- Human comes in to get coffee after turn 2 and leaves the mouse
+- Gust of wind blows through window after turn 4 and can knock over papers and/or blow stuffing around
 
 ## To-Do
-- Write functions for yes/no object buttons
-- Write logic for linked events
+- [] Write functions for yes/no object buttons
+- [] Write logic for linked events
     - Turn counter (only goes up when something breaks)
-- Write meters/score
-- Add reset button
-- write win condition
-[x] update collision function
+- [] Write meters/score
+- [] Add reset button
+- [] write win condition
+- [x] update collision function
     - shouldn't be able to still click on broken objects
-- style
-- clean up code
+- [] style
+- [] clean up code
 
 
 ## Wish List
