@@ -19,6 +19,7 @@ function Object(name,x,y,width,height, color) {
     this.color = color
     this.notBroken = true
     this.msg = `The ${this.name} is DESTROYED!`
+    this.failed = false
     this.render = function() {
         ctx.fillStyle = this.color
         ctx.fillRect(this.x,this.y,this.width,this.height)
@@ -32,7 +33,7 @@ furniture = [
     papers = new Object('stack of papers',10,300,40,100,'white'),
     rug = new Object('rug',50,500,700,100,'#4682B4'),
     coffee = new Object('cup of coffee',100,250,20,40,'peru'),
-    mouse = new Object('toy mouse',500,480,60,40,'hotpink'), 
+//    mouse = new Object('toy mouse',500,480,60,40,'hotpink'), 
 ]
 
 // Object logic
@@ -47,24 +48,52 @@ const counterEvents = () => {
     if (turnCounter === 2 && coffee.notBroken) {
         changeMsg (`Your human comes in looking for their coffee. They find it and take it away! Cup of coffee NOT destroyed 💔`,'ok')
         coffee.notBroken = false
+        coffee.failed = true
+        turnCounter = 3
+    } else if (turnCounter === 2 && coffee.notBroken === false){
+        changeMsg (`Your human comes in looking for their coffee. They see you already knocked it over! They sigh and give you a toy mouse to play with, hoping it will distract you from further mayhem`,'ok')
+        furniture.push(mouse = new Object('toy mouse',500,480,60,40,'hotpink'))
         turnCounter = 3
     } else if (turnCounter === 5 && papers.notBroken) {
         changeMsg(`A gust of wind blows through the open window. The stack of papers falls over! They're destroyed, but you can't take the credit 💔`,'ok')
         papers.notBroken = false
+        papers.failed = true
         turnCounter = 6
-    } 
+    } else if (turnCounter === 5 && pillow.notBroken === false) {
+        changeMsg(`A gust of wind blows through the open window. The pillow stuffing blows everywhere. It's great!`,'ok')
+        pillow.scattered = true
+        turnCounter = 6
+    } else if (turnCounter === 5) {
+        changeMsg(`A gust of wind blows through the open window. It's so breezy!`,'ok')
+        turnCounter = 6
+    }
 }
 
-
+//Need to figure out where to put these additions to the objects
 // 1 - Papers
     // Destroyed = knocked out window
     // Can be spilled on by coffee / still playable
     // Can be blown over by wind / not playable
 
     papers.spilledOn = false
-    papers.msg = `You push the papers out the window. They are DESTROYED!`
+    papers.msg = `These papers started blocking your favorite window last week. Nowhere else in the house gets the sun this window does. Thankfully your human left the window open today. You smack the stack of papers until it starts to topple. Soon gravity does the rest. You watch as the papers fly away on the breeze. They are DESTROYED!`
 
+// 2 - Coffee
+    coffee.msg = `You nudge the cup of coffee to the edge of the desk. You pause to look at it one last time, and then send it tumbling. Coffee spills everywhere. The mug rolls away. It has been DESTROYED!`
 
+// 3 - Human comes in
+
+// 4 - Rug
+    rug.spilledOn = false
+    rug.msg = `This rug has been good to you. It's a shame that today it must meet its end. You stretch your legs and scratch at it for a few minutes, for old times' sake. Then you sink your teeth into the rug and bite the biggest hole you can manage. It is DESTROYED!`
+
+// 5 - Toy Mouse
+
+// 6 - Wind
+
+// 7 - Pillow
+
+// 8 - Lamp
 
 
 // When called, creates a new message in the overlay // 'type' is yes/no or ok buttons
@@ -133,10 +162,15 @@ const checkCollision = e => {
                 thing.y + thing.height >= e.offsetY
             ){
                 changeMsg(`Do you want to DESTROY the ${thing.name}?`,'yes')
+                // There might be a better way to do this, but this was the only way I found that doesn't skip over any messages
                 document.querySelector('#yes-button').addEventListener('click', () => {
                     thing.notBroken = false
-                    turnCounter++
-                    overlay.classList.add('display-none')
+                    document.querySelector('#yes-button').addEventListener('blur', () => {
+                        changeMsg(thing.msg,'ok')
+                        document.querySelector('#ok-button').addEventListener('click', () => {
+                            turnCounter++
+                        })
+                    })
                 })
             }
         }
@@ -188,7 +222,7 @@ const gameLoop = () => {
 // }
 
 // shim layer with setTimeout fallback 
-// consolidates browser variations of RequestAnimationFrame into one function
+// consolidates browser variations of requestAnimationFrame into one function
 // Source: Paul Irish // https://www.paulirish.com/2011/requestanimationframe-for-smart-animating/
 
 window.requestAnimFrame = (function(){ 
