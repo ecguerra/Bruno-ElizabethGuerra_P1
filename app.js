@@ -227,13 +227,14 @@ const checkCollision = e => {
                 // There might be a better way to do this, but this was the only way I found that doesn't skip over any messages
                 document.querySelector('#yes-button').addEventListener('click', () => {
                     thing.notBroken = false
-		    thing.score = thing.score + 5			
+		            thing.score = thing.score + 5			
                     document.querySelector('#yes-button').addEventListener('blur', () => {
                         changeMsg(thing.msg,'ok')
-			document.querySelector('#ok-button').addEventListener('blur', () => {
-				itemEvents(e)
-				turnCounter++
-				console.log(turnCounter)
+			            document.querySelector('#ok-button').addEventListener('blur', () => {
+                            itemEvents(e)
+                            turnCounter++
+                            winCondition()
+				            console.log(turnCounter)
                         })
                     })
                 })
@@ -247,6 +248,26 @@ const pointAndClick = e => {
     overlay.classList.add('display-none')
     cora.x = e.offsetX
     cora.y = e.offsetY
+}
+
+const reset = () => {
+    furniture.forEach(thing => {
+        thing.notBroken = true
+        thing.failed = false
+        thing.score = 0
+        thing.spilledOn = false
+        thing.inRug = false
+    })
+    turnCounter = 0
+    gameOver = false
+}
+ 
+const winCondition = () => {
+    if (furniture.every(thing => thing.notBroken === false)) changeMsg('Hooray, everything is DESTROYED!','ok')
+    if (gameOver === true) {
+        changeMsg('The human caught you! Fun over. Try again','ok')
+        document.querySelector('#ok-button').addEventListener('click',reset)
+    }
 }
 
 //Runs the game, renders all the items
@@ -319,10 +340,12 @@ document.addEventListener('DOMContentLoaded',()=>{
        cora = new Object('Cora',390,450,20,20, 'black')
        
        turnCounter = 0
-	gameOver = false
+       gameOver = false
        
 //     document.addEventListener('keydown',movementHandler)
         document.addEventListener('click', pointAndClick)
+
+        document.querySelector('#restart').addEventListener('click',reset)
        
 //   let runGame = setInterval(gameLoop, 60) // approx 16-17 fps
         window.requestAnimFrame(gameLoop)    

@@ -18,6 +18,11 @@
   display: none !important;
 }
 
+.disabled {
+  pointer-events: none;
+  opacity: 0.7;
+}
+
 /* STYLE CLASSES */
 
 html,body {
@@ -41,15 +46,19 @@ html,body {
     align-items: center;
   }
   
-  canvas, #overlay {
+  canvas, #overlay, .bottom {
     position: absolute;
+  }
+  
+  .bottom {
+    top: 600px;
   }
   
   #overlay {
     width: 90%;
     height: 400px;
     z-index: 2;
-    top: 90px;
+    top: 50px;
     background-color: white;
     border-radius: 10px;
     display: flex;
@@ -99,10 +108,10 @@ html,body {
     cursor: pointer;
   }
 
-button:hover {
-  color: mediumslateblue;
-  background-color: lavender;
-}
+  button:hover {
+    color: mediumslateblue;
+    background-color: lavender;
+  }
 
 
   canvas {
@@ -116,56 +125,13 @@ button:hover {
     left: 0;
   }
   
-
-
   #container {
   max-width: 50em;
-  /* height: 70vh; */
   /* background-color: mediumslateblue; */
   margin: 0 auto;
   padding: 1em;
   display: flex;
   flex-direction: column;
-  /* grid-gap: 1em;
-  grid-template-rows: .25fr .5fr .25fr;
-  grid-template-columns: .25fr .5fr .25fr;
-  grid-template-areas: "top-left top-left top-right"
-                        "game game game"
-                        "overlay overlay overlay"
-                        "btm-left btm-right btm-right"; */
+  }
 
 
-
-  }
-  
-  #top-left, #top-right, #btm-left, #btm-right {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: mediumorchid;
-  }
-  
-  #top-left {
-    grid-area: top-left;
-  }
-  
-  #top-right {
-    grid-area: top-right;
-    /* background-color: #222; */
-    /* background-image: url('../img/funky-lines.png'); */
-  }
-  
-  main {
-    grid-area: game;
-  }
-  
-  
-  #btm-left {
-    grid-area: btm-left;
-    /* background-color: #222; */
-  }
-  
-  #btm-right {
-    grid-area: btm-right;
-    /* background-color: #222; */
-  }
