@@ -11,6 +11,8 @@ let mouse
 let furniture
 let gameOver
 
+let hold = false
+
 function Object(name,x,y,width,height, color) {
     this.name = name
     this.x = x
@@ -50,35 +52,46 @@ furniture = [
 
 const counterEvents = () => {
     if (turnCounter === 2 && coffee.notBroken) {
-        changeMsg (`Your human comes in looking for their coffee. They find it and take it away! Cup of coffee NOT destroyed 💔`,'ok')
+        changeMsg ('Your human comes in looking for their coffee. They find it and take it away! Cup of coffee NOT destroyed 💔','ok')
         coffee.notBroken = false
         coffee.failed = true
         turnCounter = 3
-    } else if (turnCounter === 2 && coffee.notBroken === false){
-        changeMsg (`Your human comes in looking for their coffee. They see you already knocked it over! They sigh and give you a toy mouse to play with, hoping it will distract you from further mayhem`,'ok')
+    } else if (turnCounter === 2 && (coffee.notBroken === false || rug.spilledOn)){
+       // console.log('going to show missing message')
+        // if(hold === true) {
+        //     changeMsg('The coffee spills across the desk and onto the rug! Gross. You liked that rug. Now the flavor will be all wrong.','ok')
+        //     document.querySelector('#ok-button').addEventListener('click',()=> hold = false)
+        //     console.log(hold)
+        // }
+        // if(document.querySelector('#ok-button')) {
+        //     document.querySelector('#ok-button').addEventListener('blur',() => {
+        //         changeMsg ('Your human comes in looking for their coffee. They see you already knocked it over! They sigh and give you a toy mouse to play with, hoping it will distract you from further mayhem','ok')
+        //     })  
+        // }
+        changeMsg ('Your human comes in looking for their coffee. They see you already knocked it over! They sigh and give you a toy mouse to play with, hoping it will distract you from further mayhem','ok')
         furniture.push(mouse = new Object('toy mouse',500,480,60,40,'hotpink'))
-	mouse.prompt = `Big Pinky. Your oldest friend and greatest nemesis. Many times you have killed him, and many times he has returned to thwart you! This is your final showdown. You know what you have to do. DESTROY Big Pinky?`
-	mouse.msg = `You wrestle the mouse across the room. You kick and bite every part of your foe that you can find. You're sure hours - nay - days have passed as the battle wages on. Finally Big Pinky's head parts company with his body. It is finished. Big Pinky is DESTROYED.`
+	        mouse.prompt = 'Big Pinky. Your oldest friend and greatest nemesis. Many times you have killed him, and many times he has returned to thwart you! This is your final showdown. You know what you have to do. DESTROY Big Pinky?'
+	        mouse.msg = 'You wrestle the mouse across the room. You kick and bite every part of your foe that you can find. You\'re sure hours - nay - days have passed as the battle wages on. Finally Big Pinky\'s head parts company with his body. It is finished. Big Pinky is DESTROYED.'
         turnCounter = 3
     } else if (turnCounter === 4 && papers.notBroken) {
-        changeMsg(`A gust of wind blows through the open window. The stack of papers falls over! They're destroyed, but you can't take the credit 💔`,'ok')
+        changeMsg('A gust of wind blows through the open window. The stack of papers falls over! They\'re destroyed, but you can\'t take the credit 💔','ok')
         papers.notBroken = false
         papers.failed = true
         turnCounter = 5
     } else if (turnCounter === 4 && pillow.notBroken === false) {
-        changeMsg(`A gust of wind blows through the open window. The pillow stuffing blows everywhere. It's great!`,'ok')
+        changeMsg('A gust of wind blows through the open window. The pillow stuffing blows everywhere. It\'s great!','ok')
         pillow.scattered = true
         turnCounter = 5
     } else if (turnCounter === 4) {
-        changeMsg(`A gust of wind blows through the open window. It's so breezy!`,'ok')
+        changeMsg('A gust of wind blows through the open window. It\'s so breezy!','ok')
         turnCounter = 5
     }
 }
 
 // Object customizing and turn order
 // 1 - Coffee
-    coffee.prompt = `Your human left this cup of coffee on their desk. Coffee is gross, and it's VERY close to the edge... DESTROY the cup of coffee?`
-    coffee.msg = `You nudge the cup of coffee to the edge of the desk. You pause to look at it one last time, and then send it tumbling. Coffee spills everywhere. The mug rolls away. It has been DESTROYED!`
+    coffee.prompt = 'Your human left this cup of coffee on their desk. Coffee is gross, and it\'s VERY close to the edge... DESTROY the cup of coffee?'
+    coffee.msg = 'You nudge the cup of coffee to the edge of the desk. You pause to look at it one last time, and then send it tumbling. Coffee spills everywhere. The mug rolls away. It has been DESTROYED!'
 
 // 2 - Papers
     // Destroyed = knocked out window
@@ -86,15 +99,15 @@ const counterEvents = () => {
     // Can be blown over by wind / not playable
 
     papers.spilledOn = false
-    papers.prompt = `These papers started blocking your favorite window last week. Nowhere else in the house gets the sun this window does. Thankfully your human left the window open today... DESTROY the papers?`
-    papers.msg = `You smack the stack of papers until it starts to topple. Soon gravity does the rest. You watch as the papers fly away on the breeze. They are DESTROYED!`
+    papers.prompt = 'These papers started blocking your favorite window last week. Nowhere else in the house gets the sun this window does. Thankfully your human left the window open today... DESTROY the papers?'
+    papers.msg = 'You smack the stack of papers until it starts to topple. Soon gravity does the rest. You watch as the papers fly away on the breeze. They are DESTROYED!'
 
 // 3 - Human comes in
 
 // 4 - Rug
     rug.spilledOn = false
-    rug.prompt = `This rug has been good to you. It's a shame that today it must meet its end. You stretch your legs and scratch at it for a moment, for old times' sake. DESTROY the rug?`
-    rug.msg = `You sink your teeth into the rug and bite the biggest hole you can manage. It is DESTROYED!`
+    rug.prompt = 'This rug has been good to you. It\'s a shame that today it must meet its end. You stretch your legs and scratch at it for a moment, for old times\' sake. DESTROY the rug?'
+    rug.msg = 'You sink your teeth into the rug and bite the biggest hole you can manage, which is not very big, to be honest. No matter. This rug is DESTROYED!'
 
 // 5 - Toy Mouse
 	// additional prompts under render
@@ -103,16 +116,17 @@ const counterEvents = () => {
 
 // 7 - Pillow
     pillow.scattered = false
-    pillow.prompt = `Pillows are soft and fluffy and nice to sleep on... but they are much more fun to rip apart! DESTROY the pillow?`
-    pillow.msg = `Claws and teeth and claws and more teeth! You rip that pillow to shreds! Most of its stuffing ended up near the lamp. You make a mental note to sleep there later, but for now it is DESTROYED!`
+    pillow.prompt = 'Pillows are soft and fluffy and nice to sleep on... but they are much more fun to rip apart! DESTROY the pillow?'
+    pillow.msg = 'Claws and teeth and claws and more teeth! You rip that pillow to shreds! Most of its stuffing ended up near the lamp. You make a mental note to sleep there later, but for now it is DESTROYED!'
 
 // 8 - Lamp
-    lamp.prompt = `This lamp has a metal string on it that goes DING when you hit it with your paw. You try this for a few minutes before you remember why you came over here. DESTROY the lamp?`
-    lamp.msg = `CRASH! The lamp falls to the floor. Metal and glass fly around. You jump back, but then walk over to inspect. Yes, the lamp is DESTROYED!`
+    lamp.prompt = 'This lamp has a metal string on it that goes DING when you hit it with your paw. You try this for a few minutes before you remember why you came over here. DESTROY the lamp?'
+    lamp.msg = 'You stand up on your back legs and give the lamp a big push. It starts to tip over...'
 
 // When called, creates a new message in the overlay // 'type' is yes/no or ok buttons
 const changeMsg = (msg, type) => {
     while (overlay.firstChild) overlay.removeChild(overlay.firstChild)
+    document.querySelector('#canvas-wrapper').classList.add('disabled')
     overlay.classList.remove('display-none')
     overlay.style.height = '200px'
     overlay.style.top = '220px'
@@ -132,14 +146,20 @@ const changeMsg = (msg, type) => {
         noButton.setAttribute('type','button')
         noButton.setAttribute('id','no-button')
         noButton.innerText = 'no'
-        noButton.addEventListener('click', () => overlay.classList.add('display-none'))
+        noButton.addEventListener('click', () => {
+            overlay.classList.add('display-none')
+            document.querySelector('#canvas-wrapper').classList.remove('disabled')
+        })
         buttonContainer.appendChild(noButton)
     } else if (type === 'ok') {
         let okButton = document.createElement('button')
         okButton.setAttribute('type','button')
         okButton.setAttribute('id','ok-button')
         okButton.innerText='OK'
-        okButton.addEventListener('click', () => overlay.classList.add('display-none'))
+        okButton.addEventListener('click', () => {
+            overlay.classList.add('display-none')
+            document.querySelector('#canvas-wrapper').classList.remove('disabled')
+        })
         buttonContainer.appendChild(okButton)
     }
 }
@@ -174,41 +194,72 @@ const itemEvents = e => {
    ){
 	if (thing === coffee) {
 	   if(papers.notBroken) {
+        hold = true
 		papers.spilledOn = true
 		papers.score = papers.score + 5
 		coffee.score = coffee.score + 5
 		changeMsg('The coffee spills across the desk and saturates the stack of papers! This is so much fun.', 'ok')
-	   }
+        document.querySelector('#ok-button').addEventListener('click',()=> hold = false)
+        // hold = false
+        console.log(hold)
+       }
 	    else if (rug.notBroken && papers.spilledOn === false) {
 	  	rug.spilledOn = true
-		coffee.score = coffee.score + 5
-		changeMsg('The coffee spills across the desk and onto the rug! Gross. You liked that rug. Now the flavor will be all wrong.','ok')
+        coffee.score = coffee.score + 5
+        hold = true
+            changeMsg('The coffee spills across the desk and onto the rug! Gross. You liked that rug. Now the flavor will be all wrong.','ok')
+            document.querySelector('#ok-button').addEventListener('click',()=> {
+                hold = false
+                console.log(hold)
+            })
+            //hold = false
+        
+        console.log(hold)
 		rug.failed = true
 		rug.notBroken = false
 	  }
-	}
+    }
 	if (thing === mouse) {
 	   if(rug.notBroken === false) {
 		changeMsg('You realize the hole in the rug is a perfectly-sized final resting place for Big Pinky. Sleep well, old friend','ok')
 		mouse.inRug = true
 		mouse.score = mouse.score + 5
-		rug.score = rug.score + 5
+        rug.score = rug.score + 5
+        hold = false
 	   }
 	}
 	if (thing === lamp) {
-	   if(pillow.notBroken || pillow.scattered) {
-		changeMsg('Your human hears the crash and comes in to investigate. They see the mess you\'ve made in the room and get REALLY MAD. Oh no! They pick you up and carry you out of the room.','ok')
-		lamp.failed = true
-		gameOver = true
+	   if(pillow.notBroken) {
+            changeMsg('CRASH! The lamp falls to the floor. Metal and glass fly everywhere. Your human hears the crash and comes in to investigate. They see the mess you\'ve made in the room and get REALLY MAD. Oh no! They pick you up and carry you out of the room.','ok')
+            lamp.failed = true
+            gameOver = true
 	   }
-	}
-	   else {
-		lamp.msg = 'The lamp falls over and lands with a FLUMP. A big crash would\'ve been more fun, but your human probably would\'ve heard it too.'
-		lamp.score = lamp.score + 5
-		pillow.score = pillow.score + 5
-	   }
+       else if(pillow.scattered) {
+        changeMsg('CRASH! The lamp falls to the floor. Metal and glass fly everywhere. Your human hears the crash and comes in to investigate. They see the mess you\'ve made in the room and get REALLY MAD. Oh no! They pick you up and carry you out of the room.','ok')
+           lamp.failed = true
+           gameOver = true
+       }
+       else if (pillow.notBroken === false && pillow.scattered === false) {
+            changeMsg ('The lamp falls over and lands with a FLUMP. A big crash would\'ve been more fun, but your human probably would\'ve heard it too.','ok')
+            lamp.score = lamp.score + 5
+            pillow.score = pillow.score + 5
+            hold = false
+       }
     }
-   
+
+    if(thing === papers) {
+        hold = false
+    }
+
+    if(thing === rug) {
+        hold = false
+    }
+
+    if(thing === pillow) {
+        hold = false
+    }
+
+     }   
   })
 }
 
@@ -229,12 +280,18 @@ const checkCollision = e => {
                     thing.notBroken = false
 		            thing.score = thing.score + 5			
                     document.querySelector('#yes-button').addEventListener('blur', () => {
+                        hold = true
                         changeMsg(thing.msg,'ok')
 			            document.querySelector('#ok-button').addEventListener('blur', () => {
                             itemEvents(e)
-                            turnCounter++
                             winCondition()
-				            console.log(turnCounter)
+                            turnCounter++
+                            // if (hold === true) {
+                            //     document.querySelector('#ok-button').addEventListener('click', () => counterEvents())
+                            //     hold = false
+                            // }
+                            console.log(turnCounter)
+                            console.log(furniture)
                         })
                     })
                 })
@@ -257,15 +314,35 @@ const reset = () => {
         thing.score = 0
         thing.spilledOn = false
         thing.inRug = false
+        thing.scattered = false
     })
+    if(furniture.length > 5) furniture.pop()
+    console.log(furniture)
     turnCounter = 0
     gameOver = false
+    hold = false
+    document.querySelector('#canvas-wrapper').classList.remove('disabled')
+    overlay.classList.add('display-none')
+    gameLoop()
 }
  
 const winCondition = () => {
-    if (furniture.every(thing => thing.notBroken === false)) changeMsg('Hooray, everything is DESTROYED!','ok')
     if (gameOver === true) {
-        changeMsg('The human caught you! Fun over. Try again','ok')
+        document.querySelector('#ok-button').addEventListener('blur',() => {
+            changeMsg('GAME OVER\nThe human caught you! Fun over. Try again','ok')
+            document.querySelector('#ok-button').addEventListener('click',reset)
+        })
+    }
+    else if (furniture.every(thing => thing.notBroken === false) && furniture.every(thing => thing.failed === false)) {
+        changeMsg('Hooray, everything is DESTROYED! You feel so accomplished.','ok')
+        document.querySelector('#ok-button').addEventListener('click',reset)
+    }
+    else if (furniture.every(thing => thing.notBroken === false) && furniture.some(thing => thing.failed)) {
+        if(document.querySelector('#ok-button')) {
+            document.querySelector('#ok-button').addEventListener('blur',()=>{
+                changeMsg('There\'s nothing left to destroy, but you know in your tiny furry heart you\'re capable of more','ok')
+            })
+        }
         document.querySelector('#ok-button').addEventListener('click',reset)
     }
 }
@@ -276,7 +353,7 @@ const gameLoop = () => {
     ctx.clearRect(0,0,game.width, game.height)
     document.addEventListener('click',checkCollision)
 // Right now this overwrites any secondary messages
-    counterEvents()
+    if(!hold) counterEvents()
     furniture.forEach(thing => {
         if (thing.notBroken) {
             thing.render() // when styling, create "broken" sprite for objects
