@@ -548,9 +548,15 @@ document.addEventListener('DOMContentLoaded',()=>{
 
        // Overlay for messages
        overlay = document.querySelector('#overlay')
-
-        changeMsg('You are CORA! You are a tiny kitten who enjoys RUNNING AROUND and DESTROYING THINGS. Your human left you alone in this room, which means there\'s only one thing to do: DESTROY. EVERYTHING. Find the best order to make the biggest mess!','ok')
-
+    //    hold = true
+        // overlay.addEventListener('click', e =>{
+        //     hold = false
+        //     if(!hold) {
+                changeMsg('You are CORA! You are a tiny kitten who enjoys RUNNING AROUND and DESTROYING THINGS. Your human left you alone in this room, which means there\'s only one thing to do: DESTROY. EVERYTHING. Find the best order to make the biggest mess!','ok')
+        //     }
+        //     console.log(hold)
+        // })
+        // console.log(hold)
        // context
        ctx = game.getContext('2d')
 
