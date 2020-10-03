@@ -23,10 +23,21 @@ papersImg.src = './images/papers.png'
 let rugImg = new Image()
 rugImg.src = './images/rug.png'
 
+let coffeeImg = new Image()
+coffeeImg.src = './images/coffee.png'
+
+let mouseImg = new Image()
+mouseImg.src = './images/mouse.png'
+
+let coraImg = new Image()
+coraImg.src = './images/cora.png'
+
 game = document.querySelector('#game')
     game.setAttribute('height', 600)
     game.setAttribute('width', 800)
 ctx = game.getContext('2d')
+
+let hold = false
 
 // let background = document.querySelector('#background')
 //     background.setAttribute('height', 600)
@@ -48,9 +59,6 @@ ctx = game.getContext('2d')
 
 
 //    console.log(pillowImg)
-
-
-let hold = false
 
     //    // canvas
     //    game = document.querySelector('#game')
@@ -91,25 +99,25 @@ function Object(name,x,y,width,height, color,image,ctx) {
 // pillowImg.src = './images/pillow.png'
 
 
-class ImgObject {
-constructor(x,y,image,ctx) {
-    // this.name = name+
-    this.x = x
-    this.y = y
-    // this.width = width
-    // this.height = height
-    this.image = image
-    this.notBroken = true
-    // this.prompt = `Do you want to DESTROY the ${this.name}?`
-    // this.msg = `The ${this.name} is DESTROYED!`
-    // this.failed = false
-    // this.score = 0
-    this.ctx = ctx
-}
-    render() {
-        ctx.drawImage(this.image,this.x,this.y)
-    }
-}
+// class ImgObject {
+// constructor(x,y,image,ctx) {
+//     // this.name = name+
+//     this.x = x
+//     this.y = y
+//     // this.width = width
+//     // this.height = height
+//     this.image = image
+//     this.notBroken = true
+//     // this.prompt = `Do you want to DESTROY the ${this.name}?`
+//     // this.msg = `The ${this.name} is DESTROYED!`
+//     // this.failed = false
+//     // this.score = 0
+//     this.ctx = ctx
+// }
+//     render() {
+//         ctx.drawImage(this.image,this.x,this.y)
+//     }
+// }
 
 // FURNITURE CONFIG
 furniture = [          
@@ -118,7 +126,7 @@ furniture = [
 //    pillow2 = new ImgObject(142,286, pillowImg,ctx),
     papers = new Object('stack of papers',54,307,60,100,'white',papersImg,ctx),
     rug = new Object('rug',180,450,600,140,'#4682B4',rugImg,ctx),
-    coffee = new Object('cup of coffee',160,285,20,40,'peru',pillowImg,ctx),
+    coffee = new Object('cup of coffee',160,285,20,40,'peru',coffeeImg,ctx),
 //    mouse = new Object('toy mouse',500,480,60,40,'hotpink'), 
 ]
 
@@ -150,7 +158,7 @@ const counterEvents = () => {
         //     })  
         // }
         changeMsg ('Your human comes in looking for their coffee. They see you already knocked it over! They sigh and give you a toy mouse to play with, hoping it will distract you from further mayhem','ok')
-        furniture.push(mouse = new Object('toy mouse',500,480,60,40,'hotpink'))
+        furniture.push(mouse = new Object('toy mouse',500,480,60,40,'hotpink',mouseImg,ctx))
 	        mouse.prompt = 'Big Pinky. Your oldest friend and greatest nemesis. Many times you have killed him, and many times he has returned to thwart you! This is your final showdown. You know what you have to do. DESTROY Big Pinky?'
 	        mouse.msg = 'You wrestle the mouse across the room. You kick and bite every part of your foe that you can find. You\'re sure hours - nay - days have passed as the battle wages on. Finally Big Pinky\'s head parts company with his body. It is finished. Big Pinky is DESTROYED.'
         turnCounter = 3
@@ -172,7 +180,7 @@ const counterEvents = () => {
 // Object customizing and turn order
 // 1 - Coffee
     coffee.prompt = 'Your human left this cup of coffee on their desk. Coffee is gross, and it\'s VERY close to the edge... DESTROY the cup of coffee?'
-    coffee.msg = 'You nudge the cup of coffee to the edge of the desk. You pause to look at it one last time, and then send it tumbling. Coffee spills everywhere. The mug rolls away. It has been DESTROYED!'
+    coffee.msg = 'You nudge the cup of coffee to the edge of the desk. You pause to look at it one last time, and then send it tumbling. Coffee spills everywhere. The cup rolls away. It has been DESTROYED!'
 
 // 2 - Papers
     // Destroyed = knocked out window
@@ -392,7 +400,7 @@ const pointAndClick = e => {
     overlay.classList.add('display-none')
     cora.x = e.offsetX
     cora.y = e.offsetY
-    console.log(cora.x,cora.y)
+    //console.log(cora.x,cora.y)
 }
 
 const reset = () => {
@@ -530,7 +538,7 @@ document.addEventListener('DOMContentLoaded',()=>{
        ctx = game.getContext('2d')
 
        // CHARACTER CONFIG
-       cora = new Object('Cora',390,450,20,20, 'black',pillowImg,ctx)
+       cora = new Object('Cora',390,450,20,20, 'black',coraImg,ctx)
        
     //var pillowImg = new Image()
     //     var pillowImg = document.getElementById('pillow')
