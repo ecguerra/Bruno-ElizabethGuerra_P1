@@ -51,9 +51,10 @@ I wrote the original code with WASD movement in mind, but later switched to poin
     - [x] Quick graphics
     - [] Graphics for leveled up and broken objects
     - [] Improved graphics
-- [] paw/pawprint cursor
+    - [] paw/pawprint cursor
 - [x] "Do you want to break ___?" prompts unique to each object
-- [] score meters/ something more interesting than numbers
+- [x] Display score when game ends
+    -  [] score meters/ something more interesting than numbers
 - [] More object leveling up
 - [] More objects
 - [] Sound effects & music

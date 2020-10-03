@@ -219,6 +219,7 @@ const counterEvents = () => {
     lamp.msg = 'You stand up on your back legs and give the lamp a big push. It starts to tip over...'
 
 // When called, creates a new message in the overlay // 'type' is yes/no or ok buttons
+// Maybe switch to modals to help with display bugs?
 const changeMsg = (msg, type) => {
     while (overlay.firstChild) overlay.removeChild(overlay.firstChild)
     document.querySelector('#canvas-wrapper').classList.add('disabled')
