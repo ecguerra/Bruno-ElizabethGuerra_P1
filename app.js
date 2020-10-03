@@ -465,7 +465,7 @@ const gameLoop = () => {
     window.requestAnimFrame(gameLoop)
     ctx.clearRect(0,0,game.width, game.height)
     document.addEventListener('click',checkCollision)
-// Right now this overwrites any secondary messages
+// Right now this overwrites any secondary messages // Fatima helped me fix it!
     if(!hold) counterEvents()
     furniture.forEach(thing => {
         if (thing.notBroken) {
@@ -548,36 +548,36 @@ document.addEventListener('DOMContentLoaded',()=>{
 
        // Overlay for messages
        overlay = document.querySelector('#overlay')
-    //    hold = true
+       hold = true
         // overlay.addEventListener('click', e =>{
-        //     hold = false
-        //     if(!hold) {
+            // hold = false
+            // if(!hold) {
                 changeMsg('You are CORA! You are a tiny kitten who enjoys RUNNING AROUND and DESTROYING THINGS. Your human left you alone in this room, which means there\'s only one thing to do: DESTROY. EVERYTHING. Find the best order to make the biggest mess!','ok')
-        //     }
+            // }
         //     console.log(hold)
-        // })
         // console.log(hold)
-       // context
-       ctx = game.getContext('2d')
-
-       // CHARACTER CONFIG
-       cora = new Object('Cora',390,450,20,20, 'black',coraImg,ctx)
-       
-    //var pillowImg = new Image()
-    //     var pillowImg = document.getElementById('pillow')
-    //    pillowImg.onload = function() {
-    //        ctx.drawImage(pillowImg,1,1)
-    //    }
-    //    //pillowImg.src = './images/pillow.png'
-    //    console.log(pillowImg)
-
-       turnCounter = 0
-       gameOver = false
-       
-//     document.addEventListener('keydown',movementHandler)
-        document.addEventListener('click', pointAndClick)
-
-        document.querySelector('#restart').addEventListener('click',reset)
+        // context
+        ctx = game.getContext('2d')
+        
+        // CHARACTER CONFIG
+        cora = new Object('Cora',390,450,20,20, 'black',coraImg,ctx)
+        
+        //var pillowImg = new Image()
+        //     var pillowImg = document.getElementById('pillow')
+        //    pillowImg.onload = function() {
+            //        ctx.drawImage(pillowImg,1,1)
+            //    }
+            //    //pillowImg.src = './images/pillow.png'
+            //    console.log(pillowImg)
+            
+            turnCounter = 0
+            gameOver = false
+            
+            //     document.addEventListener('keydown',movementHandler)
+            document.addEventListener('click', pointAndClick)
+            
+            document.querySelector('#restart').addEventListener('click',reset)
+        // })
        
 //   let runGame = setInterval(gameLoop, 60) // approx 16-17 fps
         window.requestAnimFrame(gameLoop)    

@@ -49,6 +49,7 @@ I wrote the original code with WASD movement in mind, but later switched to poin
 ## Stretch Goals
 - [x] Original graphics
     - [x] Quick graphics
+    - [] Graphics for leveled up and broken objects
     - [] Improved graphics
 - [] paw/pawprint cursor
 - [x] "Do you want to break ___?" prompts unique to each object
