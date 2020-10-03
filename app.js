@@ -296,7 +296,7 @@ const itemEvents = e => {
 		changeMsg('The coffee spills across the desk and saturates the stack of papers! This is so much fun.', 'ok')
         document.querySelector('#ok-button').addEventListener('click',()=> hold = false)
         // hold = false
-        console.log(hold)
+        // console.log(hold)
        }
 	    else if (rug.notBroken && papers.spilledOn === false) {
 	  	rug.spilledOn = true
@@ -305,11 +305,11 @@ const itemEvents = e => {
             changeMsg('The coffee spills across the desk and onto the rug! Gross. You liked that rug. Now the flavor will be all wrong.','ok')
             document.querySelector('#ok-button').addEventListener('click',()=> {
                 hold = false
-                console.log(hold)
+                // console.log(hold)
             })
             //hold = false
         
-        console.log(hold)
+        // console.log(hold)
 		rug.failed = true
 		rug.notBroken = false
 	  }
@@ -413,7 +413,7 @@ const reset = () => {
         thing.scattered = false
     })
     if(furniture.length > 5) furniture.pop()
-    console.log(furniture)
+    // console.log(furniture)
     turnCounter = 0
     gameOver = false
     hold = false

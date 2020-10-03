@@ -19,17 +19,16 @@ Move Cora with your mouse and walk up to things in the room to interact with the
 - Stack of Papers
     - Goal: Knock out window
     - Challenge 1: if you wait too long to knock over the stack of paper, a gust of wind blows though the room and knocks it over into the room!
-    - Challenge 2: if you don't knock the papers over before the coffee, the coffee spills on them
-    - Correct order: 1
+    - Correct order: 2
 - Cup of Coffee
     - Goal: spill
     - Challenge 1: The human comes in to get it if you don't knock it over quickly enough
-    - Challenge 2: It is supposed to be spilled onto the rug, but can also be spilled on the papers
-    - Correct order: 2
+    - Challenge 2: It is supposed to be spilled onto the papers, but can also be spilled on the rug
+    - Correct order: 1
 - Rug
     - Goal: Bite a hole
-    - Level Up: The coffee spills onto it and leaves a stain
-    - Challenge: If you don't knock the papers over first, the coffee spills on them instead
+    - Level Up: You can fit the mouse into the hole
+    - Challenge: If you knock the papers over before the coffee, the coffee spills on the rug. Cora doesn't like coffee, so she doesn't destroy the rug
     - Correct order: 3
 - Toy Mouse
     - Goal: pull apart
@@ -44,26 +43,31 @@ Move Cora with your mouse and walk up to things in the room to interact with the
 - Gust of wind blows through window after turn 4 and can knock over papers and/or blow stuffing around
 
 ## To-Do
-- [] Write functions for yes/no object buttons
-- [] Write logic for linked events
+- [x] Write functions for yes/no object buttons
+- [x] Write logic for linked events
     - Turn counter (only goes up when something breaks)
-- [] Write meters/score
-- [] Add reset button
-- [] write win condition
+- [x] Write meters/score
+    - Score for now
+- [x] Add reset button
+- [x] write win condition
 - [x] update collision function
     - shouldn't be able to still click on broken objects
-- [] style
+- [x] style
 - [] clean up code
+    - break up into multiple JS files
 
 
 ## Wish List
-- Original graphics
-    - start with boxes to get game mechanics correct
+- [x] Original graphics
+    - [x] start with boxes to get game mechanics correct
     - look at sprite packages from game bundle to use in interim
+    - better graphics later
 - paw/pawprint cursor
-- "Do you want to break ___?" prompts unique to each object
+- [x] "Do you want to break ___?" prompts unique to each object
+- score meters/ something more interesting than numbers
 - More object leveling up
 - More objects
+- Sound effects & music
 
 ## Other
 - keyCode is apparently deprecated and you should now use code [MDN Reference](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyCode)
