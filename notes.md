@@ -55,6 +55,7 @@ Move Cora with your mouse and walk up to things in the room to interact with the
 - [x] style
 - [] clean up code
     - break up into multiple JS files
+    - create digital wireframe
 
 
 ## Wish List
