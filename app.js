@@ -14,6 +14,15 @@ let gameOver
 let pillowImg = new Image()
 pillowImg.src = './images/pillow.png'
 
+let lampImg = new Image()
+lampImg.src = './images/lamp.png'
+
+let papersImg = new Image()
+papersImg.src = './images/papers.png'
+
+let rugImg = new Image()
+rugImg.src = './images/rug.png'
+
 game = document.querySelector('#game')
     game.setAttribute('height', 600)
     game.setAttribute('width', 800)
@@ -38,7 +47,7 @@ ctx = game.getContext('2d')
 //     }
 
 
-    console.log(pillowImg)
+//    console.log(pillowImg)
 
 
 let hold = false
@@ -54,21 +63,23 @@ let hold = false
 
 
 
-function Object(name,x,y,width,height, color) {
+function Object(name,x,y,width,height, color,image,ctx) {
     this.name = name
     this.x = x
     this.y = y
     this.width = width
     this.height = height
     this.color = color
+    this.image = image
     this.notBroken = true
     this.prompt = `Do you want to DESTROY the ${this.name}?`
     this.msg = `The ${this.name} is DESTROYED!`
     this.failed = false
     this.score = 0
     this.render = function() {
-        ctx.fillStyle = this.color
-        ctx.fillRect(this.x,this.y,this.width,this.height)
+        // ctx.fillStyle = this.color
+        // ctx.fillRect(this.x,this.y,this.width,this.height)
+        ctx.drawImage(this.image,this.x,this.y)
     }
 }
 
@@ -81,8 +92,8 @@ function Object(name,x,y,width,height, color) {
 
 
 class ImgObject {
-constructor(name,x,y,image,ctx) {
-    this.name = name
+constructor(x,y,image,ctx) {
+    // this.name = name+
     this.x = x
     this.y = y
     // this.width = width
@@ -102,12 +113,12 @@ constructor(name,x,y,image,ctx) {
 
 // FURNITURE CONFIG
 furniture = [          
-    lamp = new Object('lamp',650,120,40,300,'#FFFACD'),
-    pillow = new Object('pillow',542,286,50,50,'transparent'),
-    pillow2 = new ImgObject('pillow',542,286, pillowImg,ctx),
-    papers = new Object('stack of papers',54,307,60,100,'white'),
-    rug = new Object('rug',180,450,600,140,'#4682B4'),
-    coffee = new Object('cup of coffee',160,285,20,40,'peru'),
+    lamp = new Object('lamp',650,120,40,300,'#FFFACD',lampImg,ctx),
+    pillow = new Object('pillow',542,286,50,50,'transparent',pillowImg,ctx),
+//    pillow2 = new ImgObject(142,286, pillowImg,ctx),
+    papers = new Object('stack of papers',54,307,60,100,'white',papersImg,ctx),
+    rug = new Object('rug',180,450,600,140,'#4682B4',rugImg,ctx),
+    coffee = new Object('cup of coffee',160,285,20,40,'peru',pillowImg,ctx),
 //    mouse = new Object('toy mouse',500,480,60,40,'hotpink'), 
 ]
 
@@ -189,9 +200,9 @@ const counterEvents = () => {
     pillow.scattered = false
     pillow.prompt = 'Pillows are soft and fluffy and nice to sleep on... but they are much more fun to rip apart! DESTROY the pillow?'
     pillow.msg = 'Claws and teeth and claws and more teeth! You rip that pillow to shreds! Most of its stuffing ended up near the lamp. You make a mental note to sleep there later, but for now it is DESTROYED!'
-    pillow.drawObject = function(){
-        ctx.drawImage(pillowImg, 100,100)
-    }
+    // pillow.drawObject = function(){
+    // //     ctx.drawImage(pillowImg, 100,100)
+    //  }
 
 
 
@@ -519,7 +530,7 @@ document.addEventListener('DOMContentLoaded',()=>{
        ctx = game.getContext('2d')
 
        // CHARACTER CONFIG
-       cora = new Object('Cora',390,450,20,20, 'black')
+       cora = new Object('Cora',390,450,20,20, 'black',pillowImg,ctx)
        
     //var pillowImg = new Image()
     //     var pillowImg = document.getElementById('pillow')
