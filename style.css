@@ -144,4 +144,54 @@ html,body {
   flex-direction: column;
   }
 
+  .score-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin: 40px auto;
+    background: lavenderblush;
+  }
+
+  .score-container--col1, .score-container--col2 {
+    display: flex;
+    flex-direction: column;
+    width: 35%;
+  }
+
+  .score {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100px;
+    width: 100%
+    margin: 30px;
+    font-family: 'Josefin Sans', sans-serif;
+    color: indigo;
+  }
+
+.score img {
+  padding: 10px 10px 10px 30px;
+  justify-self: center;
+  align-self: center;
+}
+
+  #img-lamp {
+    height: 100%;
+  }
+
+  #img-papers {
+    height: 100%;
+  }
+
+  #img-rug {
+    width: 60%;
+  }
+
+  .score-number{
+    margin: 35px;
+    justify-self: flex-end;
+    font-size: 50px;
+  }
+
 

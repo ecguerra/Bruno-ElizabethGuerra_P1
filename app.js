@@ -385,8 +385,8 @@ const checkCollision = e => {
                             //     document.querySelector('#ok-button').addEventListener('click', () => counterEvents())
                             //     hold = false
                             // }
-                            console.log(turnCounter)
-                            console.log(furniture)
+                            //console.log(turnCounter)
+                            //console.log(furniture)
                         })
                     })
                 })
@@ -419,26 +419,41 @@ const reset = () => {
     hold = false
     document.querySelector('#canvas-wrapper').classList.remove('disabled')
     overlay.classList.add('display-none')
+    document.querySelector('.score-container').classList.add('display-none')
     gameLoop()
 }
  
 const winCondition = () => {
+    coffeeScore = document.querySelector('#coffee-score').innerText = coffee.score
+    papersScore = document.querySelector('#papers-score').innerText = papers.score
+    rugScore = document.querySelector('#rug-score').innerText = rug.score
+    pillowScore = document.querySelector('#pillow-score').innerText = pillow.score
+    lampScore = document.querySelector('#lamp-score').innerText = lamp.score
+    if (mouse) mouseScore = document.querySelector('#mouse-score').innerText = mouse.score
     if (gameOver === true) {
+        document.querySelector('.score-container').classList.remove('display-none')
         document.querySelector('#ok-button').addEventListener('blur',() => {
             changeMsg('GAME OVER\nThe human caught you! Fun over. Try again','ok')
             document.querySelector('#ok-button').addEventListener('click',reset)
         })
     }
     else if (furniture.every(thing => thing.notBroken === false) && furniture.every(thing => thing.failed === false)) {
-        changeMsg('Hooray, everything is DESTROYED! You feel so accomplished.','ok')
+        document.querySelector('.score-container').classList.remove('display-none')
+        if(document.querySelector('#ok-button')) {
+            document.querySelector('#ok-button').addEventListener('blur',()=>{
+                changeMsg('Hooray, everything is DESTROYED! You feel so accomplished.','ok')
+            })
+        }
         document.querySelector('#ok-button').addEventListener('click',reset)
     }
     else if (furniture.every(thing => thing.notBroken === false) && furniture.some(thing => thing.failed)) {
+        document.querySelector('.score-container').classList.remove('display-none')
         if(document.querySelector('#ok-button')) {
             document.querySelector('#ok-button').addEventListener('blur',()=>{
                 changeMsg('There\'s nothing left to destroy, but you know in your tiny furry heart you\'re capable of more','ok')
             })
         }
+
         document.querySelector('#ok-button').addEventListener('click',reset)
     }
 }
@@ -533,6 +548,8 @@ document.addEventListener('DOMContentLoaded',()=>{
 
        // Overlay for messages
        overlay = document.querySelector('#overlay')
+
+        changeMsg('You are CORA! You are a tiny kitten who enjoys RUNNING AROUND and DESTROYING THINGS. Your human left you alone in this room, which means there\'s only one thing to do: DESTROY. EVERYTHING. Find the best order to make the biggest mess!','ok')
 
        // context
        ctx = game.getContext('2d')

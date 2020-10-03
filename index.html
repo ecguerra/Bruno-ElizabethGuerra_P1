@@ -12,16 +12,25 @@
         <div id="container">
             <main id="main">
                 <div id="canvas-wrapper">
-                    <div id="background"><img src="../images/background-01.jpg"/></div>
+                    <div id="background"><img src="./images/background-01.jpg"/></div>
                     <!-- <canvas id="background"></canvas> -->
                     <canvas id="game"></canvas>
                 </div>
                 <div id="overlay"><h1>Cora Destroys Everything!</h1><p id="msg">Click to start playing!</p></div>
                 <aside class="bottom"><button type="reset" id="restart">Restart Game</button></aside>
             </main>
-        </div>
-        <div class="display-none">
-            <img src="./images/pillow.png" id="pillow"/>
+            <div class="score-container display-none">
+                <div class="score-container--col1">
+                    <div class="score" id="pillow"><img id="img-pillow" src="./images/pillow.png"/><div class="score-number" id="pillow-score">0</div></div>
+                    <div class="score" id="coffee"><img id="img-coffee" src="./images/coffee.png"/><div class="score-number" id="coffee-score">0</div></div>
+                    <div class="score" id="mouse"><img id="img-mouse" src="./images/mouse.png"/><div class="score-number" id="mouse-score">0</div></div>
+                </div>
+                <div class="score-container--col2">
+                    <div class="score" id="lamp"><img id="img-lamp" src="./images/lamp.png"/><div class="score-number" id="lamp-score">0</div></div>
+                    <div class="score" id="papers"><img id="img-papers" src="./images/papers.png"/><div class="score-number" id="papers-score">0</div></div>
+                    <div class="score" id="rug"><img id="img-rug" src="./images/rug.png"/><div class="score-number" id="rug-score">0</div></div>
+                </div>
+            </div>
         </div>
     <script src="./app.js"></script>
 </body>
