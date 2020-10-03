@@ -114,16 +114,26 @@ html,body {
   }
 
 
-  canvas {
-    background-image: url('./images/background-01.png');
+  canvas, #background {
+    /* background-image: url('./images/background-01.png'); */
     /* background-repeat: repeat; */
     /* background-color: lavenderblush; */
+    /* background: transparent; */
     width: 100%;
     height: 100;
-    z-index: 1;
+    /* z-index: 0; */
     top: 0;
     left: 0;
   }
+
+#background {
+    z-index: -1;
+    /* display: none; */
+}
+
+#game {
+    z-index: 0;
+}
   
   #container {
   max-width: 50em;

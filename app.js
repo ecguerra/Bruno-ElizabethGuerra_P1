@@ -11,7 +11,48 @@ let mouse
 let furniture
 let gameOver
 
+let pillowImg = new Image()
+pillowImg.src = './images/pillow.png'
+
+game = document.querySelector('#game')
+    game.setAttribute('height', 600)
+    game.setAttribute('width', 800)
+ctx = game.getContext('2d')
+
+// let background = document.querySelector('#background')
+//     background.setAttribute('height', 600)
+//     background.setAttribute('width', 800)
+
+//     let ctxBG = game.getContext('2d')
+
+// var bgImg = new Image()
+// bgImg.onload = function(){
+//     ctxBG.drawImage(bgImg,0,0)
+//  }
+//  bgImg.src = './images/background-01.jpg'
+
+// pillowImg = new Image()
+//  pillowImg.src = './images/pillow.png'
+//     pillowImg.onload = function() {
+//         ctx.drawImage(pillowImg,500,200)
+//     }
+
+
+    console.log(pillowImg)
+
+
 let hold = false
+
+    //    // canvas
+    //    game = document.querySelector('#game')
+    //    //CANVAS CONFIG
+    //    game.setAttribute('height', 600)
+    //    game.setAttribute('width', 800)
+
+    //    // context
+    //    ctx = game.getContext('2d')
+
+
 
 function Object(name,x,y,width,height, color) {
     this.name = name
@@ -31,13 +72,42 @@ function Object(name,x,y,width,height, color) {
     }
 }
 
+
+// const pillowImg = new Image()
+// // pillowImg.onload = function() {
+// //     ctx.drawImage(pillowImg, 500,200)
+// // }
+// pillowImg.src = './images/pillow.png'
+
+
+class ImgObject {
+constructor(name,x,y,image,ctx) {
+    this.name = name
+    this.x = x
+    this.y = y
+    // this.width = width
+    // this.height = height
+    this.image = image
+    this.notBroken = true
+    // this.prompt = `Do you want to DESTROY the ${this.name}?`
+    // this.msg = `The ${this.name} is DESTROYED!`
+    // this.failed = false
+    // this.score = 0
+    this.ctx = ctx
+}
+    render() {
+        ctx.drawImage(this.image,this.x,this.y)
+    }
+}
+
 // FURNITURE CONFIG
 furniture = [          
-    lamp = new Object('lamp',650,75,40,400,'#FFFACD'),
-    pillow = new Object('pillow',500,250,50,50,'#F0F8FF'),
-    papers = new Object('stack of papers',10,300,40,100,'white'),
-    rug = new Object('rug',50,500,700,100,'#4682B4'),
-    coffee = new Object('cup of coffee',100,250,20,40,'peru'),
+    lamp = new Object('lamp',650,120,40,300,'#FFFACD'),
+    pillow = new Object('pillow',542,286,50,50,'transparent'),
+    pillow2 = new ImgObject('pillow',542,286, pillowImg,ctx),
+    papers = new Object('stack of papers',54,307,60,100,'white'),
+    rug = new Object('rug',180,450,600,140,'#4682B4'),
+    coffee = new Object('cup of coffee',160,285,20,40,'peru'),
 //    mouse = new Object('toy mouse',500,480,60,40,'hotpink'), 
 ]
 
@@ -102,6 +172,7 @@ const counterEvents = () => {
     papers.prompt = 'These papers started blocking your favorite window last week. Nowhere else in the house gets the sun this window does. Thankfully your human left the window open today... DESTROY the papers?'
     papers.msg = 'You smack the stack of papers until it starts to topple. Soon gravity does the rest. You watch as the papers fly away on the breeze. They are DESTROYED!'
 
+
 // 3 - Human comes in
 
 // 4 - Rug
@@ -118,6 +189,11 @@ const counterEvents = () => {
     pillow.scattered = false
     pillow.prompt = 'Pillows are soft and fluffy and nice to sleep on... but they are much more fun to rip apart! DESTROY the pillow?'
     pillow.msg = 'Claws and teeth and claws and more teeth! You rip that pillow to shreds! Most of its stuffing ended up near the lamp. You make a mental note to sleep there later, but for now it is DESTROYED!'
+    pillow.drawObject = function(){
+        ctx.drawImage(pillowImg, 100,100)
+    }
+
+
 
 // 8 - Lamp
     lamp.prompt = 'This lamp has a metal string on it that goes DING when you hit it with your paw. You try this for a few minutes before you remember why you came over here. DESTROY the lamp?'
@@ -305,6 +381,7 @@ const pointAndClick = e => {
     overlay.classList.add('display-none')
     cora.x = e.offsetX
     cora.y = e.offsetY
+    console.log(cora.x,cora.y)
 }
 
 const reset = () => {
@@ -347,6 +424,8 @@ const winCondition = () => {
     }
 }
 
+
+
 //Runs the game, renders all the items
 const gameLoop = () => {
     window.requestAnimFrame(gameLoop)
@@ -361,6 +440,12 @@ const gameLoop = () => {
             // furniture.forEach(detectHit)
         }
     })
+
+ //   pillowImg.onload = function() {
+ //       ctx.drawImage(pillowImg,500,200)
+ //   }
+//   pillow.drawObject()
+//   pillow2.render()
     cora.render()
     }
 
@@ -399,6 +484,26 @@ window.requestAnimFrame = (function(){
               window.setTimeout(callback, 1000 / 60); 
             }; 
   })() 
+  
+//   window.onload = function() {
+//       game = document.querySelector('#game')
+//       ctx = game.getContext('2d')
+//       var pillowImg = document.querySelector('#pillow')
+//     //   var pillowImg = new Image()
+//       pillowImg.loaded = false
+//       pillowImg.onload = start
+//     //   pillowImg.src = './images/pillow.png'
+//       let imgCount = 1
+
+//     function start() {
+//         if(--imgCount>0){return}
+//         this.loaded = true
+//         ctx.drawImage(pillowImg,1,1)
+//         console.log(pillowImg.loaded)
+//     }
+
+//       console.log(pillowImg)
+//   }   
 
 document.addEventListener('DOMContentLoaded',()=>{
        // canvas
@@ -416,6 +521,14 @@ document.addEventListener('DOMContentLoaded',()=>{
        // CHARACTER CONFIG
        cora = new Object('Cora',390,450,20,20, 'black')
        
+    //var pillowImg = new Image()
+    //     var pillowImg = document.getElementById('pillow')
+    //    pillowImg.onload = function() {
+    //        ctx.drawImage(pillowImg,1,1)
+    //    }
+    //    //pillowImg.src = './images/pillow.png'
+    //    console.log(pillowImg)
+
        turnCounter = 0
        gameOver = false
        
